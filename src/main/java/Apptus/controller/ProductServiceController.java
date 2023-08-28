@@ -165,4 +165,9 @@ public class ProductServiceController {
         }
     }
 
+    @GetMapping("/info")
+    public String info(){
+        return "Test Message from Apptus";
+    }
+
 }
