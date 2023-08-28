@@ -1,0 +1,11 @@
+package Apptus.util;
+
+public class PlanMBB {
+
+    String BASKETSNAPSHOT__X_PRODUCT_MODULE_NAME;
+    int  BASKETSNAPSHOT__X_QUANTITY;
+    int  BASKETSNAPSHOT__X_VolumeTier1;
+    int  BASKETSNAPSHOT__X_VolumeTier3;
+    int  BASKETSNAPSHOT__X_VolumeTier2;
+    int BASKETSNAPSHOT__X_GSTEXCL_TOTAL_RECURRING_CHARGES;
+}
