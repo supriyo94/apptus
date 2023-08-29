@@ -75,13 +75,22 @@ public class SampleVelocityApplication {
      * @throws Exception
      */
     public String[] validateTemplate(String fileName) throws Exception {
-        //fileName = "ErrorRequest-MissingField.vm";
+
         File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\templates\\" + fileName);
         validate(file);
 
+
+
         VelocityEngine velocity = new VelocityEngine();
-        velocity.init();
-        Template template = velocity.getTemplate("src/main/resources/templates/" + fileName); // syntaxError
+
+        Properties props = new Properties();
+        props.put("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        props.put("resource.loader", "class");
+        velocity.init(props);
+
+//        Template template = velocity.getTemplate("src/main/resources/templates/" + fileName); // syntaxError
+        Template template = velocity.getTemplate("templates/"+fileName);
+
 
         Set<String> bridgeParamsSet = getVariableNames(template);
         //String[] bridgeParamsArray = bridgeParamsSet.stream().toArray(String[]:: new);
@@ -279,8 +288,10 @@ public class SampleVelocityApplication {
         try (
                 FileReader fileReader = new FileReader(file);
                 BufferedReader br = new BufferedReader(fileReader);
+
         ) {
             RuntimeSingleton.getRuntimeServices().parse(br, file.getAbsolutePath());
+
         } catch (ParseException e) {
             e.printStackTrace();
             throw new Exception("Failed to parse Template.");
